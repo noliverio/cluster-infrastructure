@@ -9,11 +9,21 @@ spec:
   project: default
   source:
     chart: argocd
-    repoURL: 
-    targetRevision: 
+    repoURL: https://argoproj.github.io/argo-helm
     helm:
-    valueFiles:
-    - values.yaml
+      valuesObject:
+        global:
+          domain: argocd.internal.coffeeandacomputer.com
+        server:
+          ingress:
+            enabled: true
+            ingressClassName: nginx 
+        configs:
+          params:
+          server.insecure: true
+          repositories:
+            private-repo:
+              url: https://github.com/noliverio/cluster-infrastructure
   destination:
     name: "in-cluster"
     namespace: argocd

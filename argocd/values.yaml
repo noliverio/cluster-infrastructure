@@ -3,7 +3,7 @@ global:
 server:
   ingress:
     enabled: true
-    ingressClassName: ingress-nginx 
+    ingressClassName: nginx 
 configs:
   params:
   server.insecure: true
