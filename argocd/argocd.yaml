@@ -25,6 +25,11 @@ spec:
           repositories:
             private-repo:
               url: https://github.com/noliverio/cluster-infrastructure
+  syncPolicy:
+    automated:
+      enabled: true
+      selfHeal: true
+      prune: true
   destination:
     name: "in-cluster"
     namespace: argocd
