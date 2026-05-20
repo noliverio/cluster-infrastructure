@@ -1,0 +1,7 @@
+apiVersion: v2
+name: ClusterInfrastructure
+version: 0.0.1
+description: Cluster Infrastructure
+type: application
+annotations:
+  example: A list of annotations keyed by name (optional).

@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: cilium
-  namespace: argocd
+  namespace: {{ .Values.spec.argoNameSpace }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
@@ -12,8 +12,12 @@ spec:
     repoURL: quay.io/cilium/charts/cilium
     targetRevision: 1.19.4
     helm:
-    valueFiles:
-    - values.yaml
+      valuesObject:
+        hubble:
+          relay:
+            enabled: true
+          ui:
+            enabled: true
   destination:
     name: "in-cluster"
     namespace: cilium

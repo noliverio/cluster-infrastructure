@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: cert-manager
-  namespace: argocd
+  namespace: {{ .Values.spec.argoNameSpace }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
@@ -12,8 +12,9 @@ spec:
     repoURL: quay.io/jetstack/charts/cert-manager
     targetRevision: v1.19.2
     helm:
-    valueFiles:
-    - values.yaml
+      valuesObject:
+        crds:
+          enabled: true
   destination:
     name: "in-cluster"
     namespace: cert-manager
