@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: cilium
-{{- include "common-app-metadata" | nindent 2 -}}
+{{- include "common-app-metadata" . | nindent 2 -}}
 spec:
   project: default
   source:
@@ -19,4 +19,4 @@ spec:
   destination:
     name: "in-cluster"
     namespace: cilium
- {{- include "default-sync-policy" | nindent 2 -}}
+ {{- include "default-sync-policy" . | nindent 2 -}}
