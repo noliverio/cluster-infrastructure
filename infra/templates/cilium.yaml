@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     chart: cilium
-    repoURL: quay.io/cilium/charts/cilium
+    repoURL: quay.io/cilium/charts
     targetRevision: 1.19.4
     helm:
       valuesObject:
@@ -18,5 +18,5 @@ spec:
             enabled: true
   destination:
     name: "in-cluster"
-    namespace: cilium
+    namespace: kube-system
   {{ template "default-sync-policy" . }}
