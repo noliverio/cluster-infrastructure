@@ -10,8 +10,7 @@ spec:
     repoURL: kubernetes.github.io/ingress-nginx
     targetRevision: 4.15.1
     helm:
-      valueFiles:
-      - ingress-nginx-values.yaml
+      valuesObject:
   destination:
     name: "in-cluster"
     namespace: ingress-nginx
