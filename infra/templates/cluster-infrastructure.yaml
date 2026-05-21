@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: argo
-{{- include "common-app-metadata" | nthindent 2 -}}
+{{- include "common-app-metadata" | nindent 2 -}}
 spec:
   project: default
   source:
@@ -23,7 +23,7 @@ spec:
             destination:
               server: https://kubernetes.default.svc
               namespace: {{ .Values.spec.argoNameSpace }}
-{{- include "default-sync-policy" | nthindent 2 -}}
+{{- include "default-sync-policy" | nindent 2 -}}
   destination:
     name: "in-cluster"
     namespace: argocd
