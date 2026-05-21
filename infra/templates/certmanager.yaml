@@ -2,9 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: cert-manager
-  namespace: {{ .Values.spec.argoNameSpace }}
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
+{{- include "common-app-metadata" | nthindent 2 -}}
 spec:
   project: default
   source:
@@ -18,3 +16,4 @@ spec:
   destination:
     name: "in-cluster"
     namespace: cert-manager
+{{- include "default-sync-policy" | nthindent 2 -}}

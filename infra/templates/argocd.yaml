@@ -2,9 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: argo
-  namespace: {{ .Values.spec.argoNameSpace }}
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
+{{- include "common-app-metadata" | nthindent 2 -}}
 spec:
   project: default
   source:
@@ -23,13 +21,8 @@ spec:
           params:
           server.insecure: true
           repositories:
-            private-repo:
-              url: https://github.com/noliverio/cluster-infrastructure
-  syncPolicy:
-    automated:
-      enabled: true
-      selfHeal: true
-      prune: true
+            url: https://github.com/noliverio/cluster-infrastructure
+{{- include "default-sync-policy" | nthindent 2 -}}
   destination:
     name: "in-cluster"
     namespace: argocd

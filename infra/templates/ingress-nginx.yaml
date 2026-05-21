@@ -2,18 +2,17 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: ingress-nginx
-  namespace: {{ .Values.spec.argoNameSpace }}
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
+{{- include "common-app-metadata" | nthindent 2 -}}
 spec:
   project: default
   source:
     chart: ingress-nginx
     repoURL: kubernetes.github.io/ingress-nginx
-    # targetRevision: 
+    targetRevision: 4.15.1
     helm:
-    valueFiles:
-    - values.yaml
+      valueFiles:
+      - ingress-nginx-values.yaml
   destination:
     name: "in-cluster"
     namespace: ingress-nginx
+{{- include "default-sync-policy" | nthindent 2 -}}

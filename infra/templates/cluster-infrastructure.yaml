@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo
+{{- include "common-app-metadata" | nthindent 2 -}}
+spec:
+  project: default
+  source:
+    chart: argocd-apps
+    repoURL: https://argoproj.github.io/argo-helm
+    targetRevision: 2.0.5
+    helm:
+      valuesObject:
+        applications:
+          cluster-infrastructure:
+            namespace: {{ .Values.spec.argoNameSpace }}
+            finalizers:
+            - resources-finalizer.argocd.argoproj.io
+            source:
+              repoURL: https://github.com/noliverio/cluster-infrastructure.git
+              targetRevision: HEAD
+              path: infra/
+            destination:
+              server: https://kubernetes.default.svc
+              namespace: {{ .Values.spec.argoNameSpace }}
+{{- include "default-sync-policy" | nthindent 2 -}}
+  destination:
+    name: "in-cluster"
+    namespace: argocd
